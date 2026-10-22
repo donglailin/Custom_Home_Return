@@ -96,6 +96,14 @@ const provider = (behavior, format, file, interval) => ({
 })
 
 const ruleProviders = {
+  // 个人维护的直连域名（DOMAIN-SUFFIX 列表）
+  DIRECT_Lin: {
+    type: 'http',
+    behavior: 'classical',
+    format: 'yaml',
+    interval: 28800,
+    url: 'https://cdn.jsdelivr.net/gh/donglailin/Custom_Home_Return@main/DIRECT_Lin.yaml',
+  },
   Custom_Direct_Domain: provider('domain', 'mrs', 'Custom_Direct_Domain.mrs', 1800),
   Custom_Direct_Classical_IP: provider('classical', 'yaml', 'Custom_Direct_Classical_IP.yaml', 28800),
   Custom_Proxy_Domain: provider('domain', 'mrs', 'Custom_Proxy_Domain.mrs', 28800),
@@ -110,6 +118,8 @@ const rules = [
   // 本地地址和域名直连
   `GEOSITE,private,${DIRECT}`,
   `GEOIP,private,${DIRECT},no-resolve`,
+  // 个人维护的直连域名
+  `RULE-SET,DIRECT_Lin,${DIRECT}`,
   // 本项目收录的直连 / 代理规则
   `RULE-SET,Custom_Direct_Domain,${DIRECT}`,
   `RULE-SET,Custom_Direct_Classical_IP,${DIRECT}`,
