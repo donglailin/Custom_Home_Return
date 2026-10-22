@@ -1,0 +1,57 @@
+# 多订阅合并配置：在下面的 url 里填写订阅链接，然后作为本地配置导入 Clash Party
+# 用不到的订阅整段删掉即可（url 留空会导致加载失败）；需要更多就复制一段，改个名字
+# 节点名前缀 [Sub1] 用来避免不同订阅的节点重名；别取带地区关键字的名字（如 US / HK / 日本）
+# 这里的 proxy-groups 和 rules 只是占位，让配置单独也能加载，后续覆写脚本会整体替换
+
+proxy-providers:
+  Sub1:
+    type: http
+    url: "在这里填写订阅链接1"
+    interval: 86400
+    header:
+      User-Agent:
+        - clash.meta
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    override:
+      additional-prefix: "[Sub1] "
+
+  Sub2:
+    type: http
+    url: "在这里填写订阅链接2"
+    interval: 86400
+    header:
+      User-Agent:
+        - clash.meta
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    override:
+      additional-prefix: "[Sub2] "
+
+  Sub3:
+    type: http
+    url: "在这里填写订阅链接3"
+    interval: 86400
+    header:
+      User-Agent:
+        - clash.meta
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    override:
+      additional-prefix: "[Sub3] "
+
+proxies: []
+
+proxy-groups:
+  - name: 🚀 手动选择
+    type: select
+    include-all: true
+
+rules:
+  - MATCH,🚀 手动选择
